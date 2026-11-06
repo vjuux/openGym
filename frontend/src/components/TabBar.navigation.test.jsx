@@ -18,7 +18,7 @@ beforeEach(() => {
   document.body.appendChild(host)
   root = createRoot(host)
   onStart = vi.fn()
-  router = createMemoryRouter([{ path: '*', element: <TabBar onStart={onStart} /> }], { initialEntries: ['/home'] })
+  router = createMemoryRouter([{ path: '*', element: <TabBar onStart={onStart} /> }], { initialEntries: ['/here'] })
   act(() => root.render(<RouterProvider router={router} />))
 })
 afterEach(() => {
@@ -37,7 +37,7 @@ const go = async to => { await act(async () => router.navigate(to)) }
 describe('root tab history', () => {
   it('does not accumulate a back stack when switching tabs repeatedly', async () => {
     for (let i = 0; i < 3; i++) {
-      for (const label of ['Plan', 'Stats', 'Exercises', 'Home']) await tap(label)
+      for (const label of ['Plan', 'Stats', 'Exercises', 'Map']) await tap(label)
     }
     await tap('Plan')
     expect(router.state.location.pathname).toBe('/plan')
@@ -47,7 +47,7 @@ describe('root tab history', () => {
 
   it('ignores a tap on the current root, but clears a tab query when returning to its root', async () => {
     const key = router.state.location.key
-    await tap('Home')
+    await tap('Map')
     expect(router.state.location.key).toBe(key)
     await go('/stats?range=month')
     await tap('Stats')
@@ -77,7 +77,7 @@ describe('root tab history', () => {
     await tap('Start')
     expect(router.state.location.pathname).toBe('/workout')
     await go(-1)
-    expect(router.state.location.pathname).toBe('/home')
+    expect(router.state.location.pathname).toBe('/here')
     expect(onStart).not.toHaveBeenCalled()
   })
 })

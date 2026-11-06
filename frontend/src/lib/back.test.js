@@ -107,7 +107,7 @@ describe('makeBackHandler', () => {
 // Tab history is not a parent page: Android must be able to leave from any root tab,
 // even after earlier navigation has left entries below it in the WebView.
 describe('back from a root tab', () => {
-  it.each(['/home', '/plan', '/stats', '/library', '/stats/', '/PLAN', '/'])(
+  it.each(['/here', '/plan', '/stats', '/library', '/stats/', '/PLAN', '/'])(
     'arms exit on %s even when the WebView can go back', pathname => {
       expect(decideBack({ pathname, canGoBack: true, exitArmed: false })).toBe('arm-exit')
       expect(decideBack({ pathname, canGoBack: true, exitArmed: true })).toBe('exit')
@@ -120,7 +120,7 @@ describe('back from a root tab', () => {
 
   it('closes a sheet on a root tab before offering to exit', () => {
     const h = harness()
-    h.setLocation({ pathname: '/home', key: 'home' })
+    h.setLocation({ pathname: '/here', key: 'home' })
     h.setSheets([{ id: 'sheet' }])
     expect(h.handler({ canGoBack: true })).toBe('sheet')
     expect(h.calls.back).toBe(0)
@@ -134,11 +134,11 @@ describe('back from a root tab', () => {
 
   it('requires a fresh exit warning after switching tabs, including a round trip', () => {
     const h = harness()
-    h.setLocation({ pathname: '/home', key: 'home-1' })
+    h.setLocation({ pathname: '/here', key: 'home-1' })
     expect(h.handler({ canGoBack: true })).toBe('arm-exit')
     h.tick(100)
     h.setLocation({ pathname: '/plan', key: 'plan' })
-    h.setLocation({ pathname: '/home', key: 'home-2' })
+    h.setLocation({ pathname: '/here', key: 'home-2' })
     expect(h.handler({ canGoBack: true })).toBe('arm-exit')
     expect(h.calls.exit).toBe(0)
     expect(h.calls.toasts).toHaveLength(2)

@@ -35,7 +35,7 @@ import { installChipDrag } from './lib/hchips.js'
 import { syncPushSubscription } from './lib/push.js'
 import { MOBILE, nativePlatform } from './lib/mobile.js'
 import { isOn } from './lib/modules.js'
-import { useTour, tourState, openTour, readTour, shouldOffer, resumeAt } from './lib/tour.js'
+import { useTour, tourState, openTour, readTour, resumeAt } from './lib/tour.js'
 import { exitWorkoutEdit, startFlow, beginWorkout, bwSheet } from './sheets.jsx'
 import Icon from './components/Icon.jsx'
 import TabBar from './components/TabBar.jsx'
@@ -56,6 +56,7 @@ import Login from './views/Login.jsx'
 import MobileOnboarding from './views/MobileOnboarding.jsx'
 import PermissionSteps from './views/PermissionSteps.jsx'
 import Home from './views/Home.jsx'
+import Here from './views/Here.jsx'
 import Plan from './views/Plan.jsx'
 import Workout from './views/Workout.jsx'
 
@@ -291,7 +292,7 @@ function Shell() {
   }, [inWorkout])
   // The chat owns the bottom of the screen as well: its composer sits where the tabs would be.
   // The first-launch card has no tabs either: they changed the route behind it.
-  const noTabs = inWorkout || loc.pathname === '/coach' || needsMobileOnboarding || permSteps
+  const noTabs = inWorkout || loc.pathname === '/coach' || loc.pathname === '/here' || needsMobileOnboarding || permSteps
 
   const authed = user || isGuest
   // The first setup is through (sign-in or "Use on this device", and the phone's permission
@@ -312,9 +313,8 @@ function Shell() {
       if (tourAsked.current || tourState() || st.S.active || useUI.getState().sheets.length || /^#\/workout/.test(window.location.hash || '')) return
       const rec = readTour()
       const at = resumeAt(rec)
-      const synced = !st.user || (st.sync?.status === 'ok' && st.sync.lastSynced > 0)
+      // This fork opens on the map with one thing to do, so the first-run tour is no longer offered.
       if (at) openTour({ kind: 'resume', at })
-      else if (shouldOffer(rec, st.S, { synced })) openTour({ kind: 'offer' })
       else return
       tourAsked.current = true
     }, 1200)
@@ -332,6 +332,7 @@ function Shell() {
 
   const view = l => (!authed ? <Login /> : needsMobileOnboarding ? <MobileOnboarding /> : permSteps ? <PermissionSteps /> : (
     <Routes location={l}>
+      <Route path="/here" element={<Here />} />
       <Route path="/home" element={<Home />} />
       {/* A module switched off (Settings → Modules, lib/modules.js) takes its screens with it: the
           route falls through to the catch-all redirect below. The data stays where it is. */}
@@ -358,7 +359,7 @@ function Shell() {
       {isOn(S, 'coach') && <Route path="/coach/proposal" element={<Navigate to="/coach" replace />} />}
       {isOn(S, 'coach') && <Route path="/coach/setup" element={<CoachSetup />} />}
       <Route path="/admin" element={user?.admin ? <Admin /> : <Navigate to="/home" replace />} />
-      <Route path="*" element={<Navigate to="/home" replace />} />
+      <Route path="*" element={<Navigate to="/here" replace />} />
     </Routes>
   ))
   const showPreview = !!preview && preview !== loc.pathname && authed && !needsMobileOnboarding && !permSteps

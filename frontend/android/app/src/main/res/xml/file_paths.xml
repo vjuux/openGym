@@ -4,4 +4,6 @@
      shared storage, so that is not exposed. -->
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
     <cache-path name="my_cache_images" path="." />
+    <!-- Where the camera app writes a photo taken for "What's here?": the app's own private folder. -->
+    <external-files-path name="captures" path="Pictures" />
 </paths>

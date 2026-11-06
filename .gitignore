@@ -48,3 +48,10 @@ assets/tee/
 assets/bmc-cover*
 # scripts/pdf/render-samples.mjs output (npm run pdf:check)
 frontend/pdf-samples/
+
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/
+
+# Never commit a key: this fork is public.
+.env.local
+*.env.local

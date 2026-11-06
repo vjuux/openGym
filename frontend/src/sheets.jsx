@@ -4034,7 +4034,7 @@ function FinishSummary({ w, prs, e1prs = [], additions = [], close }) {
     {/* Done is one tap away right under the numbers: the body map, what's next and the photo
         corner sit below it for whoever wants them, nobody has to scroll to leave (Discord). */}
     <div className="fin-actions">
-      <Button variant="primary" onClick={() => closeThenNav(close, '/home')}>{t('Nice!')}</Button>
+      <Button variant="primary" onClick={() => closeThenNav(close, '/here')}>{t('Nice!')}</Button>
       {/* The workout as a picture for a Story or a chat (components/ShareCard.jsx), the same
           card History's Share as image makes. */}
       {isOn(st, 'motivation') && <Button variant="tinted" icon="share" data-fin-share onClick={() => shareWorkoutSheet(S().workouts.find(x => x.id === w.id) || w)}>{t('Share')}</Button>}

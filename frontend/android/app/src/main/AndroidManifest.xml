@@ -380,6 +380,10 @@
 
     <!-- Whether the Health Connect app is there, on Android 13 and lower. -->
     <queries>
+        <!-- Without this the WebView cannot see a camera app: a capture input falls back to the photo picker. -->
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
         <package android:name="com.google.android.apps.healthdata" />
         <!-- "Film this set" (components/SetVideo.jsx): a file input with capture="environment"
              opens the camera app straight into video. Capacitor's file chooser asks the package

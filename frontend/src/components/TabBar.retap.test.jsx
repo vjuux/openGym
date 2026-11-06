@@ -42,8 +42,8 @@ afterEach(() => {
 })
 
 describe('tapping the tab you are on', () => {
-  it.each(['Home', 'Plan', 'Stats', 'Exercises'])('%s scrolls its page to the top, smoothly', async label => {
-    const path = { Home: '/home', Plan: '/plan', Stats: '/stats', Exercises: '/library' }[label]
+  it.each(['Map', 'Plan', 'Stats', 'Exercises'])('%s scrolls its page to the top, smoothly', async label => {
+    const path = { Map: '/here', Plan: '/plan', Stats: '/stats', Exercises: '/library' }[label]
     await act(async () => router.navigate(path))
     const key = router.state.location.key
     at(3000)

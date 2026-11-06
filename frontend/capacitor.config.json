@@ -1,8 +1,9 @@
 {
-  "appId": "ch.duartesantos.opengym",
-  "appName": "openGym",
+  "appId": "com.vjuux.spot",
+  "appName": "Spot",
   "webDir": "dist",
   "backgroundColor": "#0c0e12",
+  "loggingBehavior": "none",
   "android": {
     "allowMixedContent": true
   },
