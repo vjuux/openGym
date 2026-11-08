@@ -673,8 +673,9 @@ it after every web-code change before building natively.
 
 ## App icons & splash screens
 
-`frontend/resources/icon.svg` is the 1024×1024 source (the app's dumbbell glyph on the
-app background). Generate all platform assets from it on a machine with the tooling:
+`frontend/resources/icon.svg` is the 1024×1024 source (Spot's map pin on the app background).
+`node scripts/app-icons.mjs` draws every launcher icon from it, the default one included (see
+below). The splash screens come from the generator, on a machine with the tooling:
 
 ```sh
 cd frontend
@@ -687,9 +688,9 @@ so `npx` fetches it for that one run.
 (If the generator won't take the SVG directly, export it to `resources/icon.png` at
 1024×1024 first; any image tool can do it.)
 
-The alternate icons people can pick in Settings → Look & Home → App icon are not made by that
+The icons people can pick in Settings → Look & Home → App icon are not made by that
 generator. `node scripts/app-icons.mjs` draws them from the list in
-`src/lib/app-icon-variants.js` and the glyph in `resources/icon.svg`, with no dependencies: the
+`src/lib/app-icon-variants.js`, each `resources/icon.svg` in its own two colours, with no dependencies: the
 SVG per icon in `resources/icons/`, an `AppIcon-<Name>` set (1024 px, opaque) per icon in the iOS
 asset catalog, the Android launcher, round and adaptive layers per density, and the previews in
 `public/app-icons/`. An icon with `art` (Halloween) is a hand-made SVG in `resources/icons/`

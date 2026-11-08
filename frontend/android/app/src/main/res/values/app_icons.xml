@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Written by scripts/app-icons.mjs: behind each alternate launcher icon. -->
 <resources>
+    <color name="ic_launcher_background">#0c0e12</color>
     <color name="ic_launcher_light_background">#ffffff</color>
     <color name="ic_launcher_mono_background">#0c0e12</color>
     <color name="ic_launcher_neon_background">#a3e635</color>

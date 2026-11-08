@@ -47,6 +47,9 @@ describe('generated icon files', () => {
     }
     const sky = APP_ICON_VARIANTS.find(v => v.id === 'sky')
     expect(readFileSync(join(ROOT, `${RES}/mipmap-mdpi/ic_launcher_sky_round.png`)).equals(draw(sky, 48, { round: true }))).toBe(true)
+    // The launcher's own icon is drawn here too now (Spot's pin), not by @capacitor/assets.
+    const base = APP_ICON_VARIANTS.find(v => v.id === 'default')
+    expect(readFileSync(join(ROOT, `${RES}/mipmap-mdpi/ic_launcher_round.png`)).equals(draw(base, 48, { round: true }))).toBe(true)
     // The hand-made one goes through its own renderer, round cut included.
     const hw = APP_ICON_VARIANTS.find(v => v.id === 'halloween')
     expect(readFileSync(join(ROOT, `${RES}/mipmap-mdpi/ic_launcher_halloween_round.png`)).equals(draw(hw, 48, { round: true }))).toBe(true)

@@ -16,6 +16,7 @@ Working name. The Android app id is `com.vjuux.spot`, so it installs next to the
 | Saved places | `frontend/src/lib/spot-places.js` | An existing gym-reminder place (on the phone only) linked to an equipment profile carrying `kit` (synced, no location in it) |
 | Photo reader | `frontend/src/lib/gym-scan.js` | The user's own Gemini, OpenAI or Claude key, called from the phone. The answer only seeds chips you can flip |
 | Screens | `frontend/src/views/Here.jsx`, `components/HereMap.jsx`, `components/HereScan.jsx` | The map, the card, and "What's here?" |
+| Icon | `frontend/resources/icon.svg`, `scripts/app-icons.mjs` | A map pin. The script draws the launcher icon and every colour variant from it; the Halloween and Christmas art keep the dumbbell |
 
 A saved place is an ordinary equipment profile, so the library, the exercise picker and the plates
 all follow it without any new code.
